@@ -1,0 +1,117 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "Yellow", "id": 0, "label": "ahead", "shape": "dot", "size": 5}, {"color": "Blue", "id": 1, "label": "go", "shape": "dot", "size": 15}, {"color": "Red", "id": 2, "label": "alone", "shape": "dot", "size": 5}, {"color": "Green", "id": 3, "label": "leave", "shape": "dot", "size": 5}, {"color": "Black", "id": 4, "label": "hole", "shape": "dot", "size": 10}, {"color": "Orange", "id": 5, "label": "fuck", "shape": "dot", "size": 55}, {"color": "Brown", "id": 6, "label": "ass", "shape": "dot", "size": 45}, {"color": "Ivory", "id": 7, "label": "attacks", "shape": "dot", "size": 5}, {"color": "Teal", "id": 8, "label": "personal", "shape": "dot", "size": 5}, {"color": "Silver", "id": 9, "label": "bull", "shape": "dot", "size": 5}, {"color": "Purple", "id": 10, "label": "shit", "shape": "dot", "size": 30}, {"color": "Navy blue", "id": 11, "label": "unsigned", "shape": "dot", "size": 5}, {"color": "Pea green", "id": 12, "label": "comment", "shape": "dot", "size": 5}, {"color": "Gray", "id": 13, "label": "ed", "shape": "dot", "size": 5}, {"color": "Maroon", "id": 14, "label": "retard", "shape": "dot", "size": 5}, {"color": "Charcoal", "id": 15, "label": "mother", "shape": "dot", "size": 5}, {"color": "Aquamarine", "id": 16, "label": "ual", "shape": "dot", "size": 10}, {"color": "Coral", "id": 17, "label": "sex", "shape": "dot", "size": 15}, {"color": "Fuchsia", "id": 18, "label": "homo", "shape": "dot", "size": 15}, {"color": "Wheat", "id": 19, "label": "org", "shape": "dot", "size": 10}, {"color": "Lime", "id": 20, "label": "http", "shape": "dot", "size": 5}, {"color": "Crimson", "id": 21, "label": "wikipedia", "shape": "dot", "size": 15}, {"color": "Khaki", "id": 22, "label": "ing", "shape": "dot", "size": 5}, {"color": "Hot pink", "id": 23, "label": "suck", "shape": "dot", "size": 20}, {"color": "Magenta", "id": 24, "label": "piece", "shape": "dot", "size": 5}, {"color": "Olden", "id": 25, "label": "bitch", "shape": "dot", "size": 5}, {"color": "Plum", "id": 26, "label": "get", "shape": "dot", "size": 5}, {"color": "Olive", "id": 27, "label": "like", "shape": "dot", "size": 5}, {"color": "Cyan", "id": 28, "label": "cock", "shape": "dot", "size": 5}, {"color": "Yellow", "id": 29, "label": "cunt", "shape": "dot", "size": 5}, {"color": "Blue", "id": 30, "label": "dick", "shape": "dot", "size": 5}, {"color": "Red", "id": 31, "label": "edit", "shape": "dot", "size": 5}, {"color": "Green", "id": 32, "label": "page", "shape": "dot", "size": 10}, {"color": "Black", "id": 33, "label": "talk", "shape": "dot", "size": 5}]);
+        edges = new vis.DataSet([{"color": "Purple", "from": 18, "size": 10, "to": 17}, {"color": "Pea green", "from": 29, "size": 10, "to": 5}, {"color": "Gray", "from": 19, "size": 10, "to": 21}, {"color": "Maroon", "from": 5, "size": 10, "to": 10}, {"color": "Charcoal", "from": 7, "size": 10, "to": 8}, {"color": "Aquamarine", "from": 16, "size": 10, "to": 18}, {"color": "Coral", "from": 15, "size": 10, "to": 5}, {"color": "Fuchsia", "from": 4, "size": 10, "to": 5}, {"color": "Wheat", "from": 2, "size": 10, "to": 3}, {"color": "Lime", "from": 30, "size": 10, "to": 5}, {"color": "Crimson", "from": 24, "size": 10, "to": 10}, {"color": "Khaki", "from": 31, "size": 10, "to": 32}, {"color": "Hot pink", "from": 0, "size": 10, "to": 1}, {"color": "Magenta", "from": 5, "size": 10, "to": 6}, {"color": "Olden", "from": 27, "size": 10, "to": 6}, {"color": "Plum", "from": 23, "size": 10, "to": 6}, {"color": "Olive", "from": 33, "size": 10, "to": 32}, {"color": "Cyan", "from": 26, "size": 10, "to": 6}, {"color": "Yellow", "from": 19, "size": 10, "to": 20}, {"color": "Blue", "from": 9, "size": 10, "to": 10}, {"color": "Red", "from": 4, "size": 10, "to": 6}, {"color": "Green", "from": 1, "size": 10, "to": 5}, {"color": "Black", "from": 22, "size": 10, "to": 23}, {"color": "Orange", "from": 28, "size": 10, "to": 23}, {"color": "Brown", "from": 10, "size": 10, "to": 6}, {"color": "Ivory", "from": 16, "size": 10, "to": 17}, {"color": "Teal", "from": 11, "size": 10, "to": 12}, {"color": "Silver", "from": 21, "size": 10, "to": 10}, {"color": "Purple", "from": 13, "size": 10, "to": 14}, {"color": "Navy blue", "from": 5, "size": 10, "to": 23}, {"color": "Gray", "from": 1, "size": 10, "to": 6}, {"color": "Charcoal", "from": 25, "size": 10, "to": 5}, {"color": "Aquamarine", "from": 21, "size": 10, "to": 6}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
